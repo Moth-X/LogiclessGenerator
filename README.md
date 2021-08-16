@@ -9,7 +9,9 @@ Needs to generate some texts to test if my GUI rendering codes good or not. so I
 
 ## 再次声明一下, 本项目生成的文章真的前言不搭后语, 只能拿来搞笑, 请不要用于正规用途!
 
-本项目为python3版本，鄙人才疏学浅，初代代码仅为抛砖引玉，欢迎有能力者继续补充。
+本项目为python3版本，为使用方便同时编写了网页版：https://moth-x.github.io/LogiclessGenerator/
+
+鄙人才疏学浅，初代代码仅为抛砖引玉，欢迎有能力者继续补充。
 
 # 输出例子
 
