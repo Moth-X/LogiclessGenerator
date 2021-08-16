@@ -1,0 +1,368 @@
+<html>
+  <head>
+    <title>前言不搭后语文章生成器</title>
+    <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  </head>
+  <body>
+    <div id="主体">
+        <div id="标题">前言不搭后语文章生成器</div>
+        <div id="主题">
+        <input type = "hidden"></input>
+        <button onclick="生成文章()">生成文章</button>
+        </div>
+      <div id="论文"></div>
+    </div>
+    <div id="声明">
+      <p id="声明文字">请勿将生成的文章用于正规用途</p>
+      <p><a class="链接" href="https://github.com/menzi11/BullshitGenerator/blob/master/LICENSE_CN" target="_blank">开源许可证</a></p>
+      <p><a class="链接" href="http://guozhivip.com/fun/sm.html" target="_blank">声明</a></p>
+    </div>
+    <div id="页脚">
+      <p>
+        By Moth-X、suulnnka、menzi11
+      </p>
+      <p><a class="链接" href="https://github.com/Moth-X/LogiclessGenerator" target="_blank">前言不搭后语文章生成器LogiclessGenerator(Github)</a></p>
+      <p><a class="链接" href="https://github.com/menzi11/BullshitGenerator" target="_blank">狗屁不通文章生成器BullshitGenerator(Github)</a></p>
+    </div>
+  </body>
+</html>
+
+<script>
+let _hmt = window._hmt || [];
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BM8WXEWW3P');
+
+function track(eventName, title, seed) {
+    gtag('event', eventName, {'event_label': title,'seed': seed,'title_seed':title+'_'+seed});
+    _hmt.push(['_trackEvent', eventName, 'title', title]);
+    _hmt.push(['_trackEvent', eventName, 'title_seed', title+'_'+seed]);
+}
+
+window.$ = function (selector) {
+    return document.querySelector(selector);
+}
+
+function 获取网址参数(参数) {
+    return new URL(window.location.href).searchParams.get(参数)
+}
+window.$ = function (selector) {
+  return document.querySelector(selector);
+}
+
+let front = [
+    "你说的有道理",
+    "但是我认为",
+    "从另一个角度来看",
+    "然而不得不说的是",
+    "你忽略了一个重要的事实",
+    "但有一说一",
+    "你说得对",
+    "我认为你说的不对",
+    "你的逻辑有一定的漏洞",
+    "确实是这样的",
+    "确实",
+    "事实上",
+    "你的评论里牛头不对马嘴",
+    "你的评论前言不搭后语",
+    "我要补充一下"
+]
+
+let connect = 
+[
+    "总之反正大概了解一下意思就行了",
+    "总之反正理解下意思就行了就这个意思",
+    "理解一下意思就行了就是",
+    "所以说总之反正理解一下意思就行了",
+    "不管怎样",
+    "无论如何",
+    "总体而言",
+    "但其中有一点很重要"
+]
+
+let sentence =
+[
+    "而且因为AK不好压枪，所以带拉普兰德砍掉对面的特殊效果会很有用",
+    "亚索辅助也不是不行，就是得和格尔的一星辉头撞南墙打配合，而且新手送的骑士练起来也不亏，僵王博士的技能随便躲都可以",
+    "黄鸟的加速效果在你漂移过弯WCWW喷的时候会有很大的作用。记住，先放巨人再放法师，不然法师会被末影龙的龙息打死",
+    "但是我发现你们都是人，所以我认为人活着应该有目标",
+    "从出发到目标坐火箭最快，火箭燃料应该用水洗煤，但是烧煤会污染空气，所以我们每天要呼吸新鲜空气",
+    "但是关于冬天仓鼠能不能住进薯片里这件事，我觉得支付宝是不能够支付的",
+    "可是这种事，不能全怪人类，因为微信小程序种类是非常多的，不能只用一个",
+    "但是梵蒂冈的常住人口有800人，同时，仅澳大利亚就有4700万只袋鼠。 如果袋鼠决定入侵梵蒂冈，那么每一个梵蒂冈人要打58750只袋鼠",
+    "袋鼠的祖先是一条长颈鹿，而火星表面并没有任何关于鸭嘴兽生活的痕迹，所以我并不认可湖南人不能吃辣的问题",
+    "亚特兰蒂斯是在公元前十二年在赛博坦星球被来自m78星云来的假面骑士给毁灭的，所以才有了后面著名的通古斯大爆炸",
+    "今天下雨生吃冰箱会降火，而且把手机丢到麻辣烫里的话会更入味，另外依古比古的毛毯好像是红色的，这事也不能全怪葫芦娃，毕竟数学不好也不是一个人的事，需要夫妻双方一起努力那样就算不成功，房顶也最少能放三张大饼，再多就很辣了",
+    "可是这篇文章所描述的，并不是外星人能否扎辫子。所以你所说的微博其实是对的，但是我只想说：乌拉圭的石油在医院里面真的很吃香",
+    "我作为一个地地道道的非洲白人对于理智的疯子来说，我的秘密是不能告诉新西兰的猩猩的",
+    "昨天的猪头剃了个光头。但其实真正导致这个问题的起源是gta5很贵，我认为这个价钱可能跟你的哥哥没有关系",
+    "我喝的是美味的芜湖江水，因此美国的总统是萨科而且蒙古的海军十分强大，我认为我的逻辑没有问题因为罗技是个大牌子",
+    "可是老干妈并不能为广东肠粉提鲜，反而亚里士多德对我的感觉更为出色些",
+    "而实际上俄罗斯的优势在于地广人稀，假设愿神的成功可以带领中国单机腾飞，那么我觉得穿西装的话，还是打领带比较得体一些",
+    "因为最近天气很冷，所以风湿骨病仅仅靠贴膏药是不足以根治的，但澳大利亚袋鼠去梵蒂冈要跨越海洋，它们之间的直线距离有14390公里，如果澳大利亚袋鼠决定入侵梵蒂冈，那它们要游泳过洋攀爬山脉，两地之间的距离可能使它们全军覆没",
+    "我觉得这个观点有点偏激了，外星人是紫色的，但派大星和海绵宝宝一起去抓水母了",
+    "而且依古比古的毯子好像是红色的，打碎后加入蒜末爆香，味道老人孩子都爱吃的家常菜就做好啦",
+    "其次你这句话有点矛盾，首先鲤鱼要跃龙门必须要37°的雷雨天气，而且海绵宝宝的宠物叫小窝，拍点蒜炒香老人小孩都喜欢吃，敏感肌也可以用",
+    "虽然植物进行光合作用需要叶绿素，但是从食盐提纯的过程看来，解这个三元二次方程组我们得从秦始皇灭六国说起",
+    "你知道余华在《许三观卖血记》里面写了许三观卖血吗，我们都知道血是红色的，红色，红烧肉也是红色的，我觉得甜口的红烧肉比咸口的更好吃，那么就需要多放冰糖",
+    "的确，修行，一定要谨防造口业。不听是非，不传是非，这是一种做人的基本素养",
+    "众所周知，人和人的体质是不能一概而论的，我曾在极度伤心的情况下流了上百吨眼泪，你们可能不知道，太平洋曾经是沙漠，现在变成了海洋并且孕育出那么多生命，靠的是我一次又一次的伤心，所以伤心太平洋不是白唱的",
+    "海绵宝宝喜欢捉水母，不代表李小龙打的过泰森，核战争要是来的话，吃个棒棒糖更有助于低血糖患者康复，其实橘子都是酸的，只不过苹果手机发售的时候很贵罢了，我只能说懂得都懂",
+    "开飞机的时候不能和乘客说话，因为巧克力对身体不好",
+    "其实说实话我从来不觉得打断别人说话是一个可取的事情，但是插座它有的两个孔有的三个孔，我想充电，但是我不知道瓶盖为什么那么难扭开",
+    "叙利亚现在不知道情况怎么样，倒不是说我不在意店里的牛排是不是合成肉，就是今天抱枕被洗了晚上比较寂寞",
+    "川普跟中国打贸易战，但是b站我也才4级，连大招都没有",
+    "他们还说我今天非得走，我又没有钱，就看到了大庆油田的视频",
+    "说起唐太宗李世民，我不得不说被子要经常洗，不然的话连起沙鹰的钱都没有",
+    "你刚刚说海绵宝宝喜欢捉水母，但其实这和我们的话题不是很沾边，因为金木研只是个无辜的少年",
+    "我甚至都想不明白为什么他们不让我给03式步枪装弹上膛，漫展里的厕所我都不敢乱进，因为感冒药过期了不知道吃了会不会进医院",
+    "医生说我头晕是因为没休息好，但是偏偏红A和士郎就是同一个人",
+    "我不知在乎袋鼠，我还在乎袋獾，你知道袋獾吗，就是狼獾的澳洲远亲，狼獾机甲作为GDI的初级载具实在是太慢了，NOD不要说摩托，就是越野战车都可以甩他五条街",
+    "当然街区赛道是不过瘾的，要说赛道还得看秋名山，一提秋名山，大家都会想到藤原拓海的86，但是86式坦克在中国的知名度就不如59",
+    "虽然我认为今天的天气很奇怪，但是我的电脑还是死机了，因为布基纳法索的椰子至今也没有成熟，所以光合作用对于我们是有用的",
+    "我呼出的每一口气都有利于蜜蜂与老鼠交配繁衍，温室里的鸡经过六个月的孵化就会生根发芽",
+    "有一个全球性的问题，麻辣烫里有几颗鹌鹑蛋，这是你自己要考虑的事情，进了社会没人会帮你解决全球变暖的问题",
+    "其实我只想说铅笔并不能造出飞机，每一次降雨都会带来数以万计的蚂蚁，所以只能提高生产力，这样才能缩短轮胎破土而出的时间",
+    "我毕业于清华大学，不过去年才拿到小学毕业证，希望贵司可以将我种在撒哈拉沙漠里",
+    "从另一个角度讲，恐龙灭绝于6500万年前的白垩纪大灭绝事件，但月球上有5万个陨石坑，所以许文强和丁力可以称霸上海滩",
+    "然而很可惜日本老龄化严重，全球变暖毫无疑问会加剧这一进程",
+    "虽然植物进行光合作用需要叶绿素，但是从食盐提纯的过程看来，解这个三元二次方程组我们得从秦始皇灭六国说起",
+    "虽然我个人还是比较喜欢川菜的，但是也不介意去游个泳，因为这个季节最适合睡觉"
+]
+
+let period = 
+[
+    "你能理解吗?",
+    "但是我只想说：乌拉圭的石油在医院里面真的很吃香。",
+    "你的观点大体上是没错的，但是你没考虑到刚果的总统是黑人。",
+    "总而言之这个和你的作息有关，你可以试一试把新鲜的带鱼放在头上。",
+    "我的手机要没电了，这并不影响加拿大的冰。",
+    "言而总之：爱迪生真的不会说英语。",
+    "这就是重点。",
+    "这个季节最适合睡觉，因为我在美国的飞机上，而你却在火星上面打袋鼠",
+    "可是这篇文章所描述的，并不是外星人能否扎辫子",
+    "你说的很对，活学活用了活学活用才能理解活学活用的意义，所以插座为什么不用公牛的？",
+    "那么我觉得穿西装的话，还是打领带比较得体一些。",
+    "废纸的回收价格，会因为废纸的品质不同，价格也会有差异。"
+]
+
+function 随便取一句(列表){
+    let 坐标 = Math.floor( Math.random() * 列表.length );
+    return 列表[坐标];
+}
+
+function 随便取一个数(最小值 = 0,最大值 = 100){
+    let 数字 = Math.random()*( 最大值 - 最小值 ) + 最小值;
+    return 数字;
+}
+
+
+
+function 生成文章(){
+    主题 = $('input').value
+    let 文章 = []
+
+        let 章节 = "";
+        文章.push(随便取一句(front))
+        文章.push("，") // 加入开头词
+        let 章节长度 = 章节.length;
+        while( 章节长度 < 2000 ){
+            let 随机数 = 随便取一个数();
+            if(随机数 < 5){
+                章节 = 随便取一句(period); // 有时需要加入一些断句分割段落使得文章更加前言不搭后语
+                文章.push(章节); 
+                章节 = "";
+            }else if(随机数 < 10){
+                let 句子 = 随便取一句(connect); 
+                章节长度 = 章节长度 + 句子.length; // 加入连接词使得文章更加前言不搭后语
+                章节 = 章节 + 句子 + "，";
+            }else{
+                let 句子 = 随便取一句(sentence);
+                章节长度 = 章节长度 + 句子.length;
+                章节 = 章节 + 句子 + "，";
+            }
+        }
+    文章.push(章节);
+    文章.push(随便取一句(sentence) + "。");
+    $("#论文").innerHTML = 文章.join("");
+}
+
+</script>
+
+<style>
+  @media screen and (max-width: 1024px) {
+    html{
+      font-size: 2vw;
+      color: #333333;
+    }
+    body{
+      margin: 0;
+    }
+    #主体{
+      border: 2px solid #333333;
+      margin: 6px;
+      padding: 6px;
+      background: #f8f8f8;
+    }
+    #标题{
+      font-size: 3rem;
+      line-height: 3rem;
+      text-align: center;
+    }
+    #主题{
+      text-align: center;
+      margin-top: 6px;
+      font-size: 0px;
+    }
+    #主题 span{
+      font-size: 2rem;
+      vertical-align: baseline;
+      margin-left: 6px;
+    }
+    #主题 input{
+      border: none;
+      border-bottom: #666666 2px solid;
+      padding: 1px 0 0 0;
+      margin: 0px 6px 0 6px;
+      vertical-align: baseline;
+      font-size: 2rem;
+      background: #f8f8f8;
+      color: #333333;
+      text-align: center;
+      min-width: 20%;
+    }
+    #主题 button{
+      border: 0;
+      padding: 3px 7px 3px 7px;
+      margin: 0;
+      vertical-align: top;
+      font-size: 1.4rem;
+      background: #454545;
+      color: #efefef;
+    }
+    #文章 div{
+      margin-top: 6px;
+      font-size: 2rem;
+      text-align: justify;
+    }
+    #声明{
+      float: left;
+      margin: 0 0 0 6px;
+    }
+    #声明 p{
+      margin: 0 0 3px 3px;
+      font-size: 1.4rem;
+    }
+    #声明文字{
+      display: none;
+    }
+    #页脚{
+      margin: 6px;
+    }
+    #页脚 p{
+      margin: 3px;
+      font-size: 1.4rem;
+      text-align: right;
+    }
+    .链接{
+      color: #666666;
+    }
+    .图标{
+      height: 1rem;
+      width: 1rem;
+      vertical-align: top;
+      margin-top: 2px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    html{
+      font-size: 1.3vw;
+      color: #333333;
+    }
+    body{
+      margin: 0;
+    }
+    #主体{
+      border: 2px solid #333333;
+      margin: 20px;
+      padding: 20px;
+      background: #f8f8f8;
+    }
+    #标题{
+      font-size: 1.9rem;
+      line-height: 1.9rem;
+      text-align: center;
+    }
+    #主题{
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0px;
+    }
+    #主题 span{
+      font-size: 1rem;
+      vertical-align: baseline;
+      margin-left: 20px;
+    }
+    #主题 input{
+      border: none;
+      border-bottom: #666666 2px solid;
+      padding: 1px 0 0 0;
+      margin: 0px 20px 0 20px;
+      vertical-align: baseline;
+      font-size: 1rem;
+      background: #f8f8f8;
+      color: #333333;
+      text-align: center;
+      min-width: 20%;
+    }
+    #主题 button{
+      border: 0;
+      padding: 5px 15px 5px 15px;
+      margin: 0;
+      vertical-align: top;
+      font-size: 0.75rem;
+      background: #454545;
+      color: #efefef;
+    }
+    #文章 div{
+      margin-top: 20px;
+      text-align: justify;
+    }
+    #声明{
+      float: left;
+      margin: 0 0 0 20px;
+    }
+    #声明 p{
+      margin: 0 0 5px 5px;
+      font-size: 0.75rem;
+    }
+    #声明文字{
+      display: none;
+    }
+    #页脚{
+      margin: 20px;
+    }
+    #页脚 p{
+      margin: 5px;
+      font-size: 0.75rem;
+      text-align: right;
+    }
+    .链接{
+      color: #666666;
+    }
+    #页脚 span{
+      padding: 2px 0 0 0;
+      vertical-align: baseline;
+    }
+    .图标{
+      height: 0.7rem;
+      width: 0.7rem;
+      vertical-align: top;
+      margin-top: 4px;
+    }
+  }
+
+</style>
